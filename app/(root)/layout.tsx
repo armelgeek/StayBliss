@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import { UserAvatar } from '@/shared/components/molecules/user-avatar';
 import Link from 'next/link';
 import { AppLogo } from '@/shared/components/molecules/layout/app-logo';
+import AppFooter from '@/shared/components/molecules/layout/app-footer';
 interface RootLayoutProps {
   readonly children: React.ReactNode;
 }
@@ -53,6 +54,7 @@ export default async function BaseLayout({ children }: RootLayoutProps) {
           <main>
               {children}
           </main>
+        <AppFooter/>
     </>
   );
 }

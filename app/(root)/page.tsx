@@ -4,6 +4,7 @@ import About from '@/features/home/components/atoms/About';
 import Rooms from '@/features/room/components/molecules/Rooms';
 import Gallery from '@/features/home/components/atoms/Gallery';
 import Blog from '@/features/blog/components/molecules/Blog';
+import Contact from '@/features/contact/components/molecules/Contact';
 
 export const metadata: Metadata = {
   title: 'StayBliss',
@@ -18,6 +19,7 @@ export default function Home() {
       <Rooms />
       <Gallery />
       <Blog />
+      <Contact />
     </>
   );
 }
