@@ -20,8 +20,20 @@ export default async function BaseLayout({ children }: RootLayoutProps) {
           <header className="z-10 flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 justify-between">
             <div className="flex gap-1 sm:gap-2 md:gap-3 items-center">
              <AppLogo/>
+
+              <nav>
+                <ul className='flex flex-row gap-2 items-center'>
+                  <li>Home</li>
+                  <li>Rooms</li>
+                  <li>About</li>
+                  <li>Contact</li>
+                </ul>
+              </nav>
+
+
             </div>
             <div className="flex items-center gap-1 sm:gap-2">
+              <a href="#">Guest Area</a>
               {session ? (
                 <UserAvatar
                   isAnonymous={session.user.isAnonymous ?? false}
