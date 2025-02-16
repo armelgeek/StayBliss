@@ -24,8 +24,12 @@ export default async function BaseLayout({ children }: RootLayoutProps) {
 
               <nav>
                 <ul className='flex flex-row gap-2 items-center'>
-                  <li>Home</li>
-                  <li>Rooms</li>
+                  <li>
+                    <Link href="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link href="/rooms">Rooms</Link>
+                  </li>
                   <li>About</li>
                   <li>Contact</li>
                 </ul>
