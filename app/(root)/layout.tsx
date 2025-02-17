@@ -18,8 +18,11 @@ import { AppLogo } from '@/shared/components/molecules/layout/app-logo';
 import { UserAvatar } from '@/shared/components/molecules/user-avatar';
 import Link from 'next/link';
 import AppFooter from '@/shared/components/molecules/layout/app-footer';
+import { auth } from '@/auth';
+import { headers } from 'next/headers';
 
-const BaseLayout = ({ children, session }: { children: React.ReactNode, session: any }) => {
+const BaseLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth.api.getSession({ headers: await headers() });
   return (
     <>
       <header className="sticky px-24 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -84,8 +87,7 @@ const BaseLayout = ({ children, session }: { children: React.ReactNode, session:
             </Button>
 
             {session ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+              
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                     <UserAvatar
                       isAnonymous={session.user.isAnonymous ?? false}
@@ -96,19 +98,6 @@ const BaseLayout = ({ children, session }: { children: React.ReactNode, session:
                       }}
                     />
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuItem>
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    Sign out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
             ) : (
               <Button variant="ghost" asChild>
                 <Link href="/login">
