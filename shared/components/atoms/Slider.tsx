@@ -1,55 +1,71 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useCallback, useEffect, useState } from "react";
 
-export type SliderProps = {
-  images: string[];
-  children?: React.ReactNode;
-};
+const Slider = ({ children }: { children: JSX.Element[] }) => {
+  const [carouselAPI, setCarouselAPI] = useState<CarouselApi | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-const Slider: React.FC<SliderProps> = ({ images, children }) => {
-  const [active, setActive] = useState(1);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const onSelect = useCallback(() => {
+    if (!carouselAPI) return;
+
+    setSelectedIndex(carouselAPI.selectedScrollSnap());
+  }, [carouselAPI]);
+
+  const scrollTo = (index: number) => {
+    if (!carouselAPI) return;
+
+    carouselAPI.scrollTo(index);
+  };
 
   useEffect(() => {
-    const startInterval = () => {
-      intervalRef.current = setInterval(() => {
-        setActive((prevActive) => (prevActive >= images.length ? 1 : prevActive + 1));
-      }, 5000);
-    };
+    if (!carouselAPI) return;
 
-    startInterval();
+    onSelect();
 
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [images.length]);
+    setScrollSnaps(carouselAPI.scrollSnapList());
 
-  function handleTranslate(index: number) {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    setActive(index);
-  }
+    carouselAPI.on("select", onSelect);
+  }, [carouselAPI, onSelect]);
 
   return (
-    <div className="slider">
-      <div className="slider-overlay">{children}</div>
-      <div className="slideshow">
-        {images.map((item, index) => (
-          <div key={index} className={`slide ${active === index + 1 ? "active" : ""}`}>
-            <img src={item} alt={`Slide ${index + 1}`} />
-          </div>
-        ))}
+    <div className="relative w-full pt-3">
+      <div className="absolute inset-0 z-10 flex items-center justify-center">
+        {children}
       </div>
-      <nav className="slider-menu">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleTranslate(index + 1)}
-            className={active === index + 1 ? "active" : ""}
-          ></button>
-        ))}
-      </nav>
+      <Carousel
+        plugins={[Autoplay({ delay: 2500 })]}
+        orientation="horizontal"
+        style={{
+          height: "32rem",
+        }}
+        opts={{ loop: true, align: "center" }}
+        setApi={setCarouselAPI}
+      >
+        <CarouselContent style={{
+          height: "32rem",
+        }}>
+          {[...Array(6)].map((_, index) => (
+            <CarouselItem key={index} className="md:basis-1/2">
+              <div className="border rounded-md h-full bg-muted/50 flex items-center justify-center md:h-[15rem]">
+                <p className="font-bold text-2xl text-muted-foreground">
+                  {index + 1}
+                </p>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+     
     </div>
   );
 };
-
 export default Slider;

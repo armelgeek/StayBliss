@@ -1,6 +1,6 @@
-const kAppName = "Brandify";
-const kAppAbbr = "B";
-const kAppTagline = "Empowering developers one snippet at a time";
-const kAppDescription = `DevCode is the ultimate platform for developers to share, discover, and collaborate on code snippets. Explore snippets by programming language or framework, connect with other developers, and elevate your coding projects with ease.`;
+const kAppName = "StayBliss";
+const kAppAbbr = "SB";
+const kAppTagline = "Your home away from home";
+const kAppDescription = `StayBliss is a boutique hotel that offers a unique blend of comfort, style, and tranquility. Our cozy rooms and suites are designed to provide the ultimate relaxation experience.`;
 
 export { kAppName, kAppAbbr, kAppTagline, kAppDescription };

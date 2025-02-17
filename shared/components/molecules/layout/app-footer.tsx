@@ -1,10 +1,10 @@
 function AppFooter() {
   return (
-    <footer>
-      <nav>
+    <footer className="bg-gray-100 py-8 px-24">
+      <nav className="flex flex-wrap flex-row justify-between">
         <div>
-          <h3>Contact Us</h3>
-          <ul>
+          <h3 className="text-lg font-bold">Contact Us</h3>
+          <ul className="list-disc pl-8">
             <li>staybliss@gmail.com</li>
             <li>+26134058386</li>
             <li>StayBlish Streat</li>
@@ -12,8 +12,8 @@ function AppFooter() {
         </div>
 
         <div>
-          <h3>Link Menu</h3>
-          <ul>
+          <h3 className="text-lg font-bold">Link Menu</h3>
+          <ul className="list-disc pl-8">
             <li>Homepage</li>
             <li>Rooms</li>
             <li>Blog</li>
@@ -23,8 +23,10 @@ function AppFooter() {
         </div>
 
         <div>
-          <h3>Newsletter</h3>
-          <li>Form Will Be</li>
+          <h3 className="text-lg font-bold">Newsletter</h3>
+          <p className="text-gray-600">
+            Form Will Be
+          </p>
         </div>
       </nav>
     </footer>

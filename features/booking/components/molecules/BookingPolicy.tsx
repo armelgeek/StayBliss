@@ -1,4 +1,3 @@
-import styles from "./styles.module.css";
 import Accordion from '@/shared/components/atoms/Accordion';
 
 function BookingPolicy() {
@@ -8,7 +7,7 @@ function BookingPolicy() {
 
       <hr className="decriptionDivider" />
 
-      <div className={styles.accordion}>
+      <div>
         <Accordion label={"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing
