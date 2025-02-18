@@ -16,7 +16,7 @@ import { Brand, BrandPayload } from '@/core/domain/types/brand.type';
 
 
 
-import { BrandServiceImpl } from '../../../../core/application/services/brand/brand.service';
+import { BrandServiceImpl } from '../../../../core/application/services/brand.service';
 
 
 interface EditProps {

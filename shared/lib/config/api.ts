@@ -13,6 +13,11 @@ export const API_ENDPOINTS = {
     update: (slug: string) => `/brands/${slug}`,
     delete: (slug: string) => `/brands/${slug}`,
   },
+  rooms: {
+    base: '/rooms',
+    list: () => `/rooms`,
+    detail: (id: string) => `/rooms/${id}`
+  },
   upload: {
     base: '/upload',
     r2: '/upload/r2',

@@ -19,7 +19,7 @@ import {
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { brandKeys } from '@/core/domain/keys/brand.key';
 
-import { BrandServiceImpl } from '../../../../core/application/services/brand/brand.service';
+import { BrandServiceImpl } from '../../../../core/application/services/brand.service';
 
 interface DeleteProps {
   slug: string;

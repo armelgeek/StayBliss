@@ -4,7 +4,7 @@ import { brandKeys } from '@/core/domain/keys/brand.key';
 
 import { columns } from '@/features/brand/components/organisms/columns';
 import { DataTable } from '@/features/brand/components/organisms/data-table';
-import { BrandServiceImpl } from '@/core/application/services/brand/brand.service';
+import { BrandServiceImpl } from '@/core/application/services/brand.service';
 import { useAdvancedTable } from '@/shared/hooks/use-advanced-table';
 import { SortDirection } from '@tanstack/react-table';
 import { useQueryStateParams } from '@/shared/hooks/use-query-state-params';

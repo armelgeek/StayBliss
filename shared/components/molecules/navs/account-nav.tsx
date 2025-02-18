@@ -5,7 +5,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 
 
 
-import { ActivityIcon, SettingsIcon, UsersRoundIcon } from "lucide-react";
+import { SettingsIcon } from "lucide-react";
 
 
 

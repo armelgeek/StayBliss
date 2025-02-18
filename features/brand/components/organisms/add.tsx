@@ -18,7 +18,7 @@ import {
 import { brandKeys } from '@/core/domain/keys/brand.key';
 import { BrandPayload } from '@/core/domain/types/brand.type';
 
-import { BrandServiceImpl } from '../../../../core/application/services/brand/brand.service';
+import { BrandServiceImpl } from '../../../../core/application/services/brand.service';
 
 export function Add() {
   const queryClient = useQueryClient();
