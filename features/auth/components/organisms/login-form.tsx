@@ -3,12 +3,11 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
 import { Button, LoadingButton } from '@/components/ui/button';
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -22,6 +21,7 @@ import { cn } from '@/shared/lib/utils';
 import useLogin from '../../hooks/useLogin';
 import FormWrapper from '@/shared/components/molecules/form/FormWrapper';
 import { ControlledTextInput } from '@/shared/components/molecules/form/ControlledTextInput';
+import Banner from '@/features/home/components/atoms/Banner';
 
 export const LoginForm = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -36,6 +36,7 @@ export const LoginForm = () => {
 
   return (
     <FormWrapper form={form} onSubmit={handleSubmit}>
+        <Banner title="Login" />
         <div className="grid space-y-6">
           <ControlledTextInput
             control={form.control}

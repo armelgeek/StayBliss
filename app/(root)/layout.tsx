@@ -7,12 +7,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { AppLogo } from '@/shared/components/molecules/layout/app-logo';
 import { UserAvatar } from '@/shared/components/molecules/user-avatar';
@@ -67,13 +61,13 @@ const BaseLayout = async ({ children }: { children: React.ReactNode }) => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="/about">
+                  <NavigationMenuLink href="/about" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="/about">
                     About
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="/contact">
+                  <NavigationMenuLink href="/contact" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href="/contact">
                     Contact
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -82,10 +76,6 @@ const BaseLayout = async ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div className="flex flex-1 items-center justify-end space-x-4">
-            <Button variant="ghost" className="text-foreground" asChild>
-              <a href="#">Guest Area</a>
-            </Button>
-
             {session ? (
               
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
@@ -99,11 +89,17 @@ const BaseLayout = async ({ children }: { children: React.ReactNode }) => {
                     />
                   </Button>
             ) : (
-              <Button variant="ghost" asChild>
-                <Link href="/login">
-                  Sign in
-                </Link>
-              </Button>
+              <div className="flex items-center space-x-4">
+                 <Button variant="ghost" className="text-foreground" asChild>
+                    <a href="#">Guest Area</a>
+                </Button>
+                <Button variant="ghost" asChild>
+                    <Link href="/login">
+                      Sign in
+                    </Link>
+                  </Button>
+              </div>
+             
             )}
           </div>
         </div>

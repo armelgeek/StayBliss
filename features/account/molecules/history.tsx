@@ -1,38 +1,24 @@
-import { Trash2 } from "lucide-react";
-import Image from "next/image";
+import ReservationCard from "../atoms/ReservationCard";
 
 function History() {
   return (
-    <>
-      <h3>Your History</h3>
-      <div>
-        <article>
-          <div>
-            <Image 
-              src="/bg.png"
-              alt="Room preview"
-              width={200}
-              height={150}
-              style={{ objectFit: 'cover' }}
+    <div className="grid grid-cols-2 gap-6">
+      <h3 className="col-span-2">Your History</h3>
+        <div className="flex flex-row gap-3">
+          {[1, 2, 3].map((item2, key2) => (
+            <ReservationCard
+              key={key2}
+              thumbnailPath="/bg.png"
+              title="King Room"
+              date="20-08-2024 / 04-09-2024"
+              status={"finished"}
+              guestsCount={4}
+              price={"$465"}
+              className="col-span-1"
             />
-          </div>
-
-          <div>
-            <div>
-              <h2>King Room</h2>
-              <p>4 Guests</p>
-              <p>20-08-2024 / 04-09-2024</p>
-            </div>
-            <div>
-              <p>$465.00</p>
-              <button>
-                <Trash2/>
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </>
+          ))}
+        </div>
+    </div>
   );
 }
 
