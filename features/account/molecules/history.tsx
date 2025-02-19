@@ -1,24 +1,27 @@
+import { auth } from "@/auth";
 import ReservationCard from "../atoms/ReservationCard";
+import { headers } from "next/headers";
+import { getGuestReservations } from "@/core/application/use-cases/reservation/reservation.use-case";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
-function History() {
+async function History() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) redirect("/sign-in");
+  const reservations = (await getGuestReservations(session.user?.id)) ?? [];
+
   return (
     <div className="grid grid-cols-2 gap-6">
       <h3 className="col-span-2">Your History</h3>
-        <div className="flex flex-row gap-3">
-          {[1, 2, 3].map((item2, key2) => (
-            <ReservationCard
-              key={key2}
-              thumbnailPath="/bg.png"
-              title="King Room"
-              date="20-08-2024 / 04-09-2024"
-              status={"finished"}
-              guestsCount={4}
-              price={"$465"}
-              className="col-span-1"
-            />
-          ))}
-        </div>
-    </div>
+        {reservations.length ? (
+          reservations.reverse().map((item) => <ReservationCard key={item.id} reservation={item} />)
+        ) : (
+          <div>
+            <p>You have no booked room.</p>
+            <Link className="underline" href={"/rooms"}>View Rooms</Link>
+          </div>
+        )}
+      </div>
   );
 }
 

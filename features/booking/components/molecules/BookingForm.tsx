@@ -1,32 +1,73 @@
-import BookingButton from '../atoms/BookingButton';
-type BookingFormProps = {
-  children?: React.ReactNode
-}
-function BookingForm({ children }: BookingFormProps) {
+"use client";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { useState } from "react";
+
+import { addDays, formatISO, isBefore } from "date-fns";
+import { toast } from "sonner";
+import BookingButton from "../atoms/BookingButton";
+
+function BookingForm({ bookingSearchAction, children }: {
+  bookingSearchAction: (date: string) => Promise<void>;
+  children: React.ReactNode;
+}) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date(addDays(new Date(), 1)));
+
+  function handleStartSelection(date: Date) {
+    setStartDate(date);
+  }
+
+  function handleEndSelection(date: Date) {
+    setEndDate(date);
+  }
+
+  async function handleSearch() {
+    if (!startDate || !endDate) return;
+    const arrival = formatISO(new Date(startDate), { representation: "date" });
+    const departure = formatISO(new Date(endDate), { representation: "date" });
+    const formatedRange = `${arrival}_${departure}`;
+
+    if (!isBefore(arrival, departure)) {
+      toast.error("Invalid date range!");
+      return;
+    }
+    // await new Promise((res) => setTimeout(res, 5000));
+    await bookingSearchAction(formatedRange);
+    // router.push(`rooms?range=${formatedRange}`);
+  }
+
   return (
-    <form className="flex flex-col gap-4 pl-3">
-      <h1 className="text-3xl font-bold">BOOK A ROOM ONLINE</h1>
-      <div className="flex gap-4">
-        <div>
-          <label className="block" htmlFor="arrival">
-            Arrival
-          </label>
-          <input type="date" name="arrival" id="arrival" className="border border-gray-300 rounded-md p-2" />
-        </div>
-        <div>
-          <label className="block" htmlFor="departure">
-            Departure
-          </label>
-          <input type="date" name="departure" id="departure" className="border border-gray-300 rounded-md p-2" />
-        </div>
+    <form action={handleSearch}>
+      <h1>BOOK A ROOM ONLINE</h1>
+      <div>
+        <label htmlFor="">Arrival</label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => handleStartSelection(date as Date)}
+          selectsStart
+          startDate={startDate}
+          endDate={endDate}
+          dateFormat={"dd/MM/yyyy"}
+          excludeDateIntervals={[{ start: new Date("01/01/1970"), end: new Date() }]}
+        />
+      </div>
+      <div>
+        <label htmlFor="">Departure</label>
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => handleEndSelection(date  as Date)}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          dateFormat={"dd/MM/yyyy"}
+          excludeDateIntervals={[{ start: new Date("01/01/1970"), end: new Date() }]}
+        />
       </div>
 
-      <div className="flex gap-4">
-        <BookingButton onClick={() => {
-          console.log('handle booking')
-        }}>
-          Book now
-        </BookingButton>
+      <div>
+        <BookingButton />
         <div>{children}</div>
       </div>
     </form>

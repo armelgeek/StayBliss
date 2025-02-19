@@ -1,19 +1,38 @@
-import Slider from '@/shared/components/atoms/Slider';
-import FilterSection from '@/features/room/components/molecules/FilterSection';
-import RoomItem from '@/features/room/components/molecules/RootItem';
-function Rooms() {
+import Banner from "@/features/home/components/atoms/Banner";
+import FilterSection from "@/features/room/components/molecules/FilterSection";
+import RoomsSection from "@/features/room/components/molecules/RoomsSection";
+import { Suspense } from "react";
+
+export const metadata = {
+  title: "Rooms",
+  description: "Discover and book a room at the Hotel Booking App ",
+};
+
+function Rooms({ searchParams }:{
+  searchParams: {
+    sort: string
+    range: string
+  }
+}) {
+  const filter = searchParams?.sort ?? "default";
+  const range = searchParams?.range ?? "";
   return (
     <>
-      <Slider images={["/bg.png", "/bg.png", "/bg.png"]} />
+      <Banner title={"Accomodation Options"} />
 
-      <div>
-        <FilterSection />
+      <div className={`container`}>
+        <FilterSection filters={{ filter, range }} />
 
-        <div>
-          <RoomItem price="300" imgPath="/bg.png" link="#" />
-          <RoomItem price="300" imgPath="/bg.png" link="#" />
-          <RoomItem price="300" imgPath="/bg.png" link="#" />
-        </div>
+        <Suspense
+          key={`${filter}-${range}`}
+          fallback={
+            <div>
+              
+            </div>
+          }
+        >
+          <RoomsSection filter={filter} range={range} />
+        </Suspense>
       </div>
     </>
   );

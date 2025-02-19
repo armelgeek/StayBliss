@@ -1,4 +1,4 @@
-import Card from "@/shared/components/atoms/Card";
+
 import { cn } from "@/shared/lib/utils";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 
 function RoomCard({ className }: Props) {
   return (
-    <Card className={cn("flex flex-col overflow-hidden rounded-lg shadow-lg", className)}>
+    <Card  className={cn("flex flex-col overflow-hidden rounded-lg shadow-lg", className)}>
       <Card.Thumbnail className="relative h-48 w-full">
         <img src={"/room.png"} alt="" className="h-full w-full object-cover" />
         <div className="absolute top-0 left-0 h-full w-full bg-gray-900 opacity-50" />

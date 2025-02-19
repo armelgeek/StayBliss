@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselApi,
@@ -7,9 +6,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useCallback, useEffect, useState } from "react";
+import { JSX, useCallback, useEffect, useState } from "react";
 
-const Slider = ({ children }: { children: JSX.Element[] }) => {
+const Slider = ({ images, children }: { images?: string[], children: JSX.Element[] }) => {
+  const [imgs, setImgs] = useState(images ? images: [...Array(6)]);
   const [carouselAPI, setCarouselAPI] = useState<CarouselApi | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -53,7 +53,7 @@ const Slider = ({ children }: { children: JSX.Element[] }) => {
         <CarouselContent style={{
           height: "32rem",
         }}>
-          {[...Array(6)].map((_, index) => (
+          {imgs.map((_, index) => (
             <CarouselItem key={index} className="md:basis-1/2">
               <div className="border rounded-md h-full bg-muted/50 flex items-center justify-center md:h-[15rem]">
                 <p className="font-bold text-2xl text-muted-foreground">
