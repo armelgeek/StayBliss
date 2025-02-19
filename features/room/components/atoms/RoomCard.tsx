@@ -1,25 +1,20 @@
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
 
-import { cn } from "@/shared/lib/utils";
-
-type Props = {
-  className?: string;
-};
-
-function RoomCard({ className }: Props) {
+function RoomCard({ room }:{
+  room: {
+    id: string
+    name: string
+    capacity: number
+    thumbnail: string
+  }
+}) {
   return (
-    <Card  className={cn("flex flex-col overflow-hidden rounded-lg shadow-lg", className)}>
-      <Card.Thumbnail className="relative h-48 w-full">
-        <img src={"/room.png"} alt="" className="h-full w-full object-cover" />
-        <div className="absolute top-0 left-0 h-full w-full bg-gray-900 opacity-50" />
-      </Card.Thumbnail>
-
-      <Card.Description className="p-4">
-        <h2 className="text-lg font-bold">Bed Room</h2>
-
-        <p className="text-sm text-gray-600">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia voluptates amet atque.
-        </p>
-      </Card.Description>
+    <Card className="relative">
+      <Image src={room.thumbnail} alt={room.name} fill className="object-cover w-full h-full" />
+      <div className="flex items-center justify-center">
+        <h2 className="text-white text-2xl">{room.name}</h2>
+      </div>
     </Card>
   );
 }

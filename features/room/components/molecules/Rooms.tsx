@@ -14,7 +14,7 @@ async function Rooms() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-3">
           {rooms.map((item) => (
-            <RoomCard key={item.id} className="p-6" />
+            <RoomCard key={item.id} room={item} />
           ))}
         </div>
       </div>

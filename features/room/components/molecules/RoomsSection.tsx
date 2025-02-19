@@ -8,14 +8,13 @@ async function RoomsSection({ filter, range }:{
   range: string
 }) {
   const rooms = await getAllRooms();
-
-  await filterRoomsByDate();
-
+  console.log('range', range.split("_")?.at(0), range.split("_")?.at(1));
   let filteredRooms = rooms;
-
+  
   if (range && isValid(new Date(range.split("_")?.at(0))) && isValid(new Date(range.split("_")?.at(1)))) {
     const arrivalDate = range.split("_")?.at(0);
     const departureDate = range.split("_")?.at(1);
+    
     filteredRooms = await filterRoomsByDate(arrivalDate, departureDate);
   }
 
@@ -37,10 +36,11 @@ async function RoomsSection({ filter, range }:{
     default:
       filteredRooms = filteredRooms;
   }
+  
 
   return (
     <div>
-      {filteredRooms.map((item) => (
+     {filteredRooms.map((item) => (
         <RoomItem key={item.id} id={item.id} title={item.name} price={item.price} imgPath={item.thumbnail} link="#" />
       ))}
     </div>

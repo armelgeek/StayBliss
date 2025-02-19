@@ -8,14 +8,14 @@ export const metadata = {
   description: "Discover and book a room at the Hotel Booking App ",
 };
 
-function Rooms({ searchParams }:{
+async function Rooms({ searchParams }:{
   searchParams: {
     sort: string
     range: string
   }
 }) {
-  const filter = searchParams?.sort ?? "default";
-  const range = searchParams?.range ?? "";
+  const filter = await searchParams?.sort ?? "default";
+  const range = await searchParams?.range ?? "";
   return (
     <>
       <Banner title={"Accomodation Options"} />

@@ -5,6 +5,8 @@ import Rooms from '@/features/room/components/molecules/Rooms';
 import Gallery from '@/features/home/components/atoms/Gallery';
 import Blog from '@/features/blog/components/molecules/Blog';
 import Contact from '@/features/contact/components/molecules/Contact';
+import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'StayBliss',
@@ -12,12 +14,24 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+   async function bookingSearchAction(formatedRange: string) {
+    "use server";
+    redirect(`/rooms?range=${formatedRange}`);
+  }
   return (
     <>
-      <HeroSection/>
+      <HeroSection bookingSearchAction={bookingSearchAction} />
       <About />
-      <Rooms />
-      <Gallery />
+      <Suspense
+        fallback={
+          <div className="global-loading">
+          
+          </div>
+        }
+      >
+        <Rooms />
+        <Gallery />
+      </Suspense>
       <Blog />
       <Contact />
     </>

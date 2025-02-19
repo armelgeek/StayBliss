@@ -469,26 +469,31 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   data-disabled={disabled || undefined}
                 >
                   {option.label}
-                  <button
+                  <div
                     className="absolute -inset-y-px -end-px flex size-7 items-center justify-center rounded-e-lg border border-transparent p-0 text-muted-foreground/80 outline-0 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        handleUnselect(option);
-                      }
-                    }}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onClick={() => handleUnselect(option)}
-                    aria-label="Remove"
                   >
-                    <X
-                      size={14}
-                      strokeWidth={2}
-                      aria-hidden="true"
-                    />
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => handleUnselect(option)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleUnselect(option);
+                        }
+                      }}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }}
+                      aria-label="Remove"
+                      className="flex h-full w-full items-center justify-center"
+                    >
+                      <X
+                        size={14}
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -526,12 +531,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 inputProps?.className,
               )}
             />
-            <button
-              type="button"
-              onClick={() => {
-                setSelected(selected.filter((s) => s.fixed));
-                onChange?.(selected.filter((s) => s.fixed));
-              }}
+            <div
               className={cn(
                 'absolute end-0 top-0 flex size-9 items-center justify-center rounded-lg border border-transparent text-muted-foreground/80 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70',
                 (hideClearAllButton ||
@@ -540,14 +540,23 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   selected.filter((s) => s.fixed).length === selected.length) &&
                   'hidden',
               )}
-              aria-label="Clear all"
             >
-              <X
-                size={16}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
-            </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelected(selected.filter((s) => s.fixed));
+                  onChange?.(selected.filter((s) => s.fixed));
+                }}
+                aria-label="Clear all"
+                className="flex h-full w-full items-center justify-center"
+              >
+                <X
+                  size={16}
+                  strokeWidth={2}
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
           </div>
         </div>
         <div className="relative">

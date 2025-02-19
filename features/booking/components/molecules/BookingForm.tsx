@@ -9,7 +9,7 @@ import BookingButton from "../atoms/BookingButton";
 
 function BookingForm({ bookingSearchAction, children }: {
   bookingSearchAction: (date: string) => Promise<void>;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date(addDays(new Date(), 1)));
