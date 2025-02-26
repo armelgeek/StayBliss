@@ -109,9 +109,6 @@ function RoomBookingForm({ bookingAction, room }:{
           </div>
         </div>
 
-        {/* <button type="submit" className={styles.formButton} disabled={state.isBooking}>
-          {state.isBooking ? "Booking..." : "Book Now"}
-        </button> */}
         <ReservationButton />
       </div>
     </form>

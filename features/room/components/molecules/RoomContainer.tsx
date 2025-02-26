@@ -15,16 +15,18 @@ async function RoomContainer({ params }:{
         room_slug: string;
     }
 }) {
+  console.log(params?.room_slug);
   const room = await getRoomById(params?.room_slug);
+  console.log('room', room)
   const room_images = await getRoomImages(params?.room_slug ?? []);
-
-  const images = room_images.map((item) => `${item.img_path}`);
+  const images = room_images.map((item) => `${item.image}`);
 
   if (!room) notFound();
 
+
   async function bookingAction(prevState:{
     isBooking: boolean
-  }, formData) {
+  }, formData: FormData) {
     "use server";
 
     prevState = { ...prevState, isBooking: true };
@@ -39,9 +41,9 @@ async function RoomContainer({ params }:{
       bookingSchema.parse({ start_date, end_date, guests_count });
     } catch (err) {
       isValid = false;
-      /**err.errors.forEach((element) => {
+      err.errors.forEach((element) => {
         prevState[element?.path[0] ?? "unknown"] = element.message;
-      });**/
+      });
 
       return { ...prevState, isBooking: false };
     } finally {

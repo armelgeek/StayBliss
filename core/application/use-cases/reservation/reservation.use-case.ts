@@ -1,7 +1,7 @@
 import { formatISO9075, isValid } from "date-fns";
 import { db } from "@/drizzle/db";
 import { reservations } from "@/drizzle/schema/reservations";
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, isNull, sql } from "drizzle-orm";
 import { rooms } from "@/drizzle/schema/rooms";
 
 interface ReservationInput {
@@ -15,12 +15,12 @@ interface ReservationInput {
   stripe_session_id?: string;
   status: string;
 }
-
 export async function getRoomReservations(id: string) {
   const res = await db.select().from(reservations).where(eq(reservations.room_id, id));
-
+  console.log('ici leka', res);
   return res;
 }
+
 
 export async function getGuestReservations(guest_id: string) {
   const res = await db
@@ -131,7 +131,7 @@ type ReservationPayload = {
   reserved_price: string;
   guests_count: number;
   rooms: {
-    thumbnail: string;
+    thumbnail: string | null;
     name: string;
     capacity: number;
     price: number;
@@ -141,39 +141,14 @@ type ReservationPayload = {
     last_name: string;
   };
 }
-export async function getReservationByID(id: string): Promise<ReservationPayload | null> {
-  try {
-    const reservation = await db
-      .select({
-        id: reservations.id,
-        room_id: reservations.room_id,
-        guest_id: reservations.guest_id,
-        start_date: reservations.start_date,
-        end_date: reservations.end_date,
-        status: reservations.status,
-        reserved_price: reservations.reserved_price,
-        guests_count: reservations.guests_count,
-        rooms: {
-          thumbnail: rooms.thumbnail,
-          name: rooms.name,
-          capacity: rooms.capacity,
-          price: rooms.price,
-        },
-      })
-      .from(reservations)
-      .leftJoin(rooms, eq(reservations.room_id, rooms.id)) 
-      .where(eq(reservations.id, id))
-      .then((res) => res[0]);
+export async function getReservationByID(id: string) {
+  const result = await db
+    .select()
+    .from(reservations)
+    .where(eq(reservations.id, id))
+    .leftJoin(rooms, eq(reservations.room_id, rooms.id));
 
-    if (!reservation) {
-      throw new Error("Réservation non trouvée.");
-    }
-
-    return reservation;
-  } catch (error) {
-    console.error("Erreur lors de la récupération de la réservation :", error);
-    throw new Error("Impossible de récupérer la réservation.");
-  }
+  return result[0] || null;
 }
 export async function updateReservation(id: string, price: number, guests_count: number, start_date: string | Date, end_date: string | Date) {
   try {

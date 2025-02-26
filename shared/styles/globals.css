@@ -78,23 +78,54 @@
   * {
     @apply border-border;
   }
+ 
   body {
     @apply bg-background text-foreground;
   }
 
-  /* Custom scrollbar styling. Thanks @pranathiperii. */
-  pre::-webkit-scrollbar {
-    width: 5px;
+
+  html {
+    @apply scroll-smooth scroll-pt-6;
   }
-  pre::-webkit-scrollbar-track {
-    background: transparent;
+
+  /* 
+  🟨🟨🟨🟨🟨🟨🟨🟨🟨
+  Browser Main Scrollbar 
+  🟨🟨🟨🟨🟨🟨🟨🟨🟨
+  */
+
+  html::-webkit-scrollbar {
+    width: 8px;
   }
-  pre::-webkit-scrollbar-thumb {
-    background: hsl(var(--border));
-    border-radius: 5px;
+
+  html::-webkit-scrollbar-thumb {
+    border-radius   : 2px;
+    background-color: #a37d4c;
   }
-  pre {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--border)) transparent;
+
+  html::-webkit-scrollbar-track {
+    background-color: #FFFFFF;
+  }
+
+ 
+
+  .btn-sm {
+    @apply h-[48px];
+  }
+
+  .btn-lg {
+    @apply h-[60px];
+  }
+
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover;
+  }
+
+  .btn-secondary {
+    @apply bg-primary hover:bg-accent;
+  }
+
+  .btn-white {
+    @apply bg-white text-[#0a0a0a];
   }
 }

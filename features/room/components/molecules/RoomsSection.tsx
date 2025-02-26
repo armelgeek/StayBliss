@@ -41,7 +41,7 @@ async function RoomsSection({ filter, range }:{
   return (
     <div>
      {filteredRooms.map((item) => (
-        <RoomItem key={item.id} id={item.id} title={item.name} price={item.price} imgPath={item.thumbnail} link="#" />
+        <RoomItem key={item.id} id={item.id} title={item.name} price={item.price} imgPath={item.thumbnail} link={`/rooms/${item.id}`} />
       ))}
     </div>
   );

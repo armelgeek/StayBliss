@@ -1,5 +1,6 @@
 import { cn } from "@/shared/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 function RoomItem({ title, imgPath, className, price, link }: { 
   title?: string;
@@ -22,7 +23,7 @@ function RoomItem({ title, imgPath, className, price, link }: {
       </div>
       <div className="flex flex-col p-4">
         <h2 className="text-lg font-bold">{title}</h2>
-        <a href={link ?? "#"} className="text-blue-500 hover:underline">From ${price} / Night</a>
+        <Link href={link ?? "#"} className="text-blue-500 hover:underline">From ${price} / Night</Link>
       </div>
     </div>
   );

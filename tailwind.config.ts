@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
-
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme';
+import animate from 'tailwindcss-animate';
 
 export default {
   darkMode: ['class'],
@@ -8,13 +8,23 @@ export default {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './features/**/*.{js,ts,jsx,tsx,mdx}',
+    './shared/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '15px',
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         serif: [...defaultTheme.fontFamily.serif],
         mono: [...defaultTheme.fontFamily.mono],
+      },
+      backgroundImage: {
+        room: "url('/img/room.jpg')",
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -22,6 +32,11 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        primary: '#0a0a0a',
+        accent: {
+          DEFAULT: '#a37d4c',
+          hover: '#967142',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -32,10 +47,6 @@ export default {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))',
         },
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
@@ -43,10 +54,6 @@ export default {
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -75,20 +82,12 @@ export default {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
@@ -97,5 +96,5 @@ export default {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [animate],
 } satisfies Config;

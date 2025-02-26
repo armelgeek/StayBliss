@@ -10,11 +10,11 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const inter = fontMap['inter'].next;
+  const barlow = fontMap['barlow'].next;
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} r font-sans antialiased`}>
+      <body className={`${barlow.className}`}>
         <Provider>
               {children}
         </Provider>

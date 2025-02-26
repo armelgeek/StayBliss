@@ -1,9 +1,15 @@
-import { Archivo, Inter, Libre_Franklin } from 'next/font/google';
+import { Archivo, Barlow, Inter, Libre_Franklin } from 'next/font/google';
 
 const archivo = Archivo({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-archivo",
+});
+const barlow = Barlow({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-barlow",
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 const libre_franklin = Libre_Franklin({
   subsets: ["latin"],
@@ -25,6 +31,10 @@ const fontMap = {
   archivo: {
     next: archivo,
     tailwind: 'var(--font-archivo)',
+  },
+  barlow: {
+    next: barlow,
+    tailwind: 'var(--font-barlow)',
   },
   libre_franklin: {
     next: libre_franklin,
