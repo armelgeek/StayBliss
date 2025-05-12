@@ -12,79 +12,75 @@ import Link from 'next/link';
 import AppFooter from '@/shared/components/molecules/layout/app-footer';
 import { auth } from '@/auth';
 import { headers } from 'next/headers';
+import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 
 const BaseLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth.api.getSession({ headers: await headers() });
   return (
     <>
-      <header className="sticky px-24 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <div className="flex gap-6 md:gap-10">
-            <AppLogo />
+      <div className='hidden md:flex justify-between bg-black px-20 py-2 w-full h-[48px] text-white item-center'>
 
-            <NavigationMenu className="hidden md:flex">
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                    Home
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/rooms" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                    Rooms
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/about" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                    About
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/contact" className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                    Contact
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+        <div className='flex content-center gap-x-4 leading-3'>
+          <div className='font-normal text-xs'>
+            Email:
+            <p className='text-[#15B392]'>staybliss@gmail.com</p>
           </div>
 
-          <div className="flex flex-1 items-center justify-end space-x-4">
-            {session ? (
-              
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full" asChild>
-                    <div>
-                      <UserAvatar
-                        isAnonymous={session.user.isAnonymous ?? false}
-                        user={{
-                          name: session.user.name,
-                          email: session.user.email,
-                          avatar: session.user.image,
-                        }}
-                      />
-                    </div>
-                  </Button>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <Button variant="ghost" className="text-foreground" asChild>
-                 <Link href="/register">
-                    Guest Area
-                  </Link>
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/login">
-                    Sign in
-                  </Link>
-                </Button>
-              </div>
-             
-            )}
+        </div>
+        <div className='flex justify-center items-center gap-x-2 h-full'>
+          <div className='flex justify-center items-center p-1 border-[1px] border-white rounded-full'>
+            <Facebook size={16} />
+          </div>
+          <div className='flex justify-center items-center p-1 border-[1px] border-white rounded-full'>
+            <Twitter size={16} />
+          </div>
+          <div className='flex justify-center items-center p-1 border-[1px] border-white rounded-full'>
+            <Instagram size={16} />
+          </div>
+          <div className='flex justify-center items-center p-1 border-[1px] border-white rounded-full'>
+            <Linkedin size={16} />
           </div>
         </div>
+
+      </div>
+      <header className="flex justify-between items-center bg-white pr-10 md:pr-20 w-full">
+
+        <AppLogo />
+
+        <div className="flex flex-1 justify-end items-center space-x-4">
+
+          <ul className="flex gap-x-6 mr-5 cursor-default">
+            <li className="font-medium text-[#15B392]">Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+          {session ? (
+
+            <Button variant="ghost" className="relative rounded-full w-8 h-8" asChild>
+              <div>
+                <UserAvatar
+                  isAnonymous={session.user.isAnonymous ?? false}
+                  user={{
+                    name: session.user.name,
+                    email: session.user.email,
+                    avatar: session.user.image,
+                  }}
+                />
+              </div>
+            </Button>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" asChild>
+                <Link href="/login">
+                  Sign in
+                </Link>
+              </Button>
+            </div>
+
+          )}
+        </div>
       </header>
-      <main className="container mx-auto px-24">
+      <main className="mx-auto px-24 container">
         {children}
       </main>
       <AppFooter />
