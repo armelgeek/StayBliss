@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Comforter+Brush&family=Pacifico&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -81,51 +81,28 @@
  
   body {
     @apply bg-background text-foreground;
+    font-family: "ABeeZee", sans-serif;
   }
 
 
   html {
-    @apply scroll-smooth scroll-pt-6;
+    @apply scroll-pt-6 scroll-smooth;
   }
 
-  /* 
-  🟨🟨🟨🟨🟨🟨🟨🟨🟨
-  Browser Main Scrollbar 
-  🟨🟨🟨🟨🟨🟨🟨🟨🟨
-  */
+}
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  html::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  html::-webkit-scrollbar-thumb {
-    border-radius   : 2px;
-    background-color: #a37d4c;
-  }
-
-  html::-webkit-scrollbar-track {
-    background-color: #FFFFFF;
-  }
-
- 
-
-  .btn-sm {
-    @apply h-[48px];
-  }
-
-  .btn-lg {
-    @apply h-[60px];
-  }
-
-  .btn-primary {
-    @apply bg-accent hover:bg-accent-hover;
-  }
-
-  .btn-secondary {
-    @apply bg-primary hover:bg-accent;
-  }
-
-  .btn-white {
-    @apply bg-white text-[#0a0a0a];
-  }
+.staybliss{
+  color: #15B392;
+}
+.staybliss-secondary {
+  color: hsl(47, 98%, 50%)
+}
+.heading {
+  font-family: 'Comforter Brush';
+  color: hsl(47, 98%, 50%)
 }

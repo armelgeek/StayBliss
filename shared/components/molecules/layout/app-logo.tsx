@@ -7,14 +7,14 @@ import Link from 'next/link';
 
 export function AppLogo() {
   return (
-    <Link href='/' className="flex items-center gap-3">
-      <Avatar className={cn("rounded-md size-9")}>
-        <AvatarFallback className={cn("rounded-md")}>{kAppAbbr}</AvatarFallback>
-      </Avatar>
 
-      <span className="truncate font-semibold text-xl">
-        {kAppName.toUpperCase()}
-      </span>
+    <Link href='/' className="flex items-center gap-3">
+      <div className="relative">
+        <img src="/logo.png" alt="vector" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 flex justify-start items-center bg-black bg-opacity-0 ml-2">
+         <p className="pl-8 text-white text-2xl pacifico-regular"> {kAppName}</p>
+        </div>
+      </div>
     </Link>
   );
 }
